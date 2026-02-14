@@ -49,11 +49,6 @@ export default async function CategoriesPage() {
                   <h3 className="font-semibold text-base group-hover:text-accent transition-colors">
                     {category.name}
                   </h3>
-                  {category.description && (
-                    <p className="text-xs text-muted-foreground line-clamp-2">
-                      {category.description}
-                    </p>
-                  )}
                 </div>
                 <div className="flex items-center gap-1 text-xs text-accent opacity-0 group-hover:opacity-100 transition-opacity">
                   Lihat Produk
