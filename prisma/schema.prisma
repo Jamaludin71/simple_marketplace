@@ -1,0 +1,119 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  phone     String?
+  address   String?
+  role      Role     @default(BUYER)
+  avatar    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  products  Product[]
+  cartItems CartItem[]
+  orders    Order[]    @relation("BuyerOrders")
+  sales     Order[]    @relation("SellerOrders")
+}
+
+enum Role {
+  BUYER
+  SELLER
+  ADMIN
+}
+
+model Category {
+  id   Int    @id @default(autoincrement())
+  name String
+  slug String @unique
+
+  products Product[]
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  sellerId    String
+  categoryId  Int
+  name        String
+  slug        String
+  description String?
+  price       Decimal
+  stock       Int      @default(0)
+  image       String?
+  status      Status   @default(ACTIVE)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  seller     User        @relation(fields: [sellerId], references: [id])
+  category   Category    @relation(fields: [categoryId], references: [id])
+  cartItems  CartItem[]
+  orderItems OrderItem[]
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
+}
+
+model CartItem {
+  id        String @id @default(uuid())
+  userId    String
+  productId String
+  quantity  Int    @default(1)
+
+  user    User    @relation(fields: [userId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
+
+  @@unique([userId, productId])
+}
+
+model Order {
+  id              String      @id @default(uuid())
+  orderNumber     String      @unique
+  buyerId         String
+  sellerId        String
+  totalPrice      Decimal
+  shippingAddress String
+  shippingCost    Decimal     @default(0)
+  paymentMethod   String
+  paymentProof    String?
+  status          OrderStatus @default(PENDING)
+  notes           String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  buyer      User        @relation("BuyerOrders", fields: [buyerId], references: [id])
+  seller     User        @relation("SellerOrders", fields: [sellerId], references: [id])
+  orderItems OrderItem[]
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+model OrderItem {
+  id          String  @id @default(uuid())
+  orderId     String
+  productId   String
+  productName String
+  price       Decimal
+  quantity    Int
+  subtotal    Decimal
+
+  order   Order   @relation(fields: [orderId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
+}
