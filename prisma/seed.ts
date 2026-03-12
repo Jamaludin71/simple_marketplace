@@ -119,7 +119,7 @@ async function main() {
               price: 120000,
               stock: 100,
               status: Status.ACTIVE,
-              image: 'https://images.unsplash.com/photo-1596755094514-f87e32f85e23?w=500'
+              image: '/kemeja_flanel_hd.png'
           },
              {
               name: 'Celana Chino',
