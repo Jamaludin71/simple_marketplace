@@ -74,7 +74,8 @@ async function main() {
             description: 'Laptop gaming murah specs tinggi',
             price: 15000000,
             stock: 5,
-            status: Status.ACTIVE
+            status: Status.ACTIVE,
+            image: 'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=500'
         },
         {
             name: 'Mouse Wireless',
@@ -82,7 +83,8 @@ async function main() {
             description: 'Mouse tanpa kabel dengan lampu RGB',
             price: 150000,
             stock: 50,
-            status: Status.ACTIVE
+            status: Status.ACTIVE,
+            image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=500'
         },
         {
             name: 'Keyboard Mechanical',
@@ -90,7 +92,8 @@ async function main() {
             description: 'Keyboard switch blue clicky',
             price: 500000,
             stock: 20,
-            status: Status.ACTIVE
+            status: Status.ACTIVE,
+            image: 'https://images.unsplash.com/photo-1595225476474-87563907a212?w=500'
         }
     ]
 
@@ -115,7 +118,8 @@ async function main() {
               description: 'Kemeja bahan adem motif kotak',
               price: 120000,
               stock: 100,
-              status: Status.ACTIVE
+              status: Status.ACTIVE,
+              image: 'https://images.unsplash.com/photo-1596755094514-f87e32f85e23?w=500'
           },
              {
               name: 'Celana Chino',
@@ -123,7 +127,8 @@ async function main() {
               description: 'Celana panjang bahan katun twill',
               price: 150000,
               stock: 80,
-              status: Status.ACTIVE
+              status: Status.ACTIVE,
+              image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=500'
           },
              {
               name: 'Jaket Bomber',
@@ -131,7 +136,8 @@ async function main() {
               description: 'Jaket bomber warna navy',
               price: 250000,
               stock: 30,
-              status: Status.ACTIVE
+              status: Status.ACTIVE,
+              image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500'
           }
       ]
 
