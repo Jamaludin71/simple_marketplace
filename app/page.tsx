@@ -41,8 +41,9 @@ export default async function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section - Elegant & Dramatic */}
-      <section className="relative bg-gradient-to-br from-elegant-black via-secondary/20 to-elegant-black text-white py-24 px-4 md:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(201,166,107,0.1),transparent_50%)]" />
+      <section className="relative bg-[#1a1a1a] text-white py-24 px-4 md:py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] via-[#8b7355]/30 to-[#1a1a1a]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(201,166,107,0.15),transparent_50%)]" />
         <div className="container mx-auto flex flex-col items-center text-center space-y-8 relative z-10">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/30 bg-accent/10 backdrop-blur-sm">
             <Sparkles className="h-4 w-4 text-accent" />

@@ -28,23 +28,37 @@ export function ProductCard({
             <Card className="overflow-hidden border border-border/60 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5 hover:border-accent/30 h-full flex flex-col">
                 {/* Image - 3:4 aspect ratio untuk kesan portrait yang elegant */}
                 <div className="aspect-[3/4] bg-muted relative overflow-hidden">
-                    {image ? (
-                        <>
-                            <Image
-                                src={image}
-                                alt={name}
-                                fill
-                                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            />
-                            {/* Subtle overlay on hover */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-foreground/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                        </>
-                    ) : (
-                        <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-                            <ShoppingBag className="h-16 w-16" />
-                        </div>
-                    )}
+                    {(() => {
+                        let imageUrl = image;
+                        if (image && image.startsWith('[') && image.endsWith(']')) {
+                            try {
+                                const parsed = JSON.parse(image);
+                                if (Array.isArray(parsed) && parsed.length > 0) {
+                                    imageUrl = parsed[0];
+                                }
+                            } catch {
+                                // Ignore
+                            }
+                        }
+
+                        return imageUrl ? (
+                            <>
+                                <Image
+                                    src={imageUrl}
+                                    alt={name}
+                                    fill
+                                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                />
+                                {/* Subtle overlay on hover */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-foreground/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                            </>
+                        ) : (
+                            <div className="w-full h-full flex items-center justify-center text-muted-foreground">
+                                <ShoppingBag className="h-16 w-16" />
+                            </div>
+                        );
+                    })()}
                     
                     {/* Stock Badge */}
                     <div className="absolute top-3 right-3">
